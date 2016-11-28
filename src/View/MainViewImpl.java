@@ -36,7 +36,11 @@ public class MainViewImpl implements MainView {
   private TextField txtFieldBrightless;
   @FXML
   private Slider sliderBrightless;
-
+  @FXML
+  private TextField txtFieldIpAdress;
+  @FXML
+  private TextField txtFieldPort;
+  
   @Override
   public GridPane getLayoutGridPane() {
     return layoutGridPane;
@@ -58,6 +62,7 @@ public class MainViewImpl implements MainView {
       public void changed(ObservableValue<?> arg0, Object arg1, Object arg2) {
         txtFieldBrightless.setText(String.valueOf(sliderBrightless.getValue()));
         mainViewController.setBrightles(sliderBrightless.getValue());
+        
       }
     });
 
@@ -65,25 +70,32 @@ public class MainViewImpl implements MainView {
                                                                                // select pane
     // colour pane listener
     EventHandler<MouseEvent> rectMouseHandler = event -> {
-      int rgb = Color.HSBtoRGB(colourSelectPane.getHue().getValue().floatValue(),
-          colourSelectPane.getSaturation().getValue().floatValue(), (float) sliderBrightless.getValue());
+      int rgb = Color.HSBtoRGB(colourSelectPane.getHue().getValue().floatValue()/360,
+          colourSelectPane.getSaturation().getValue().floatValue()/100, (float) sliderBrightless.getValue()/100);
       Color.getColor(String.valueOf(rgb));
       Color color = new Color(rgb);
-
+      System.out.println(color);
       txtFieldRed.setText(String.valueOf(color.getRed()));
       txtFieldGreen.setText(String.valueOf(color.getGreen()));
       txtFieldBlue.setText(String.valueOf(color.getBlue()));
       txtFieldWhite.setText(String.valueOf(100 - colourSelectPane.getSaturation().getValue().intValue()));
       mainViewController.setColurs(color.getRed(), color.getGreen(), color.getBlue(),
           100 - colourSelectPane.getSaturation().getValue().intValue());
+      
     };
     layoutGridPane.setOnMouseDragged(rectMouseHandler);
     layoutGridPane.setOnMousePressed(rectMouseHandler);
-
-
-
   }
 
+  public String getPortNumber(){
+	return txtFieldPort.getText();
+	  
+  }
+  
+  public String getIpAdress(){
+	return txtFieldIpAdress.getText();
+	  
+  }
 
 
 

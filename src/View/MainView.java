@@ -11,4 +11,8 @@ public interface MainView {
   public GridPane getLayoutGridPane();
 
   public ColourSelectPane getColourSelectPane();
+  
+  public String getIpAdress();
+  
+  public String getPortNumber();
 }

@@ -1,6 +1,7 @@
 
 import Controller.MainViewController;
 import Objects.LedStrip;
+import Objects.Server;
 import View.MainView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -43,8 +44,6 @@ public class ProgramStart extends Application{
       stage.sizeToScene();
       stage.setScene(scene);
       stage.show();
-
-
 
     } catch (Exception e) {
       System.out.println(e);

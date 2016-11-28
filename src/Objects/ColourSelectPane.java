@@ -43,6 +43,11 @@ public class ColourSelectPane{
       final double y = event.getY();
       hue.set(hueBorder(((y / whiteRectOverlay.getHeight()) * 360)));
       saturation.set(clamp(x / whiteRectOverlay.getWidth()) * 100);
+//      System.out.println("x: " + x);
+//      System.out.println("y: " + y);
+//      System.out.println("hue: " + hue.getValue().intValue());
+//      System.out.println("sat: "+ saturation.getValue().intValue());
+//      System.out.println(" ");
     };
 
     // attach event handler to overlay so it will capture values from overlay
