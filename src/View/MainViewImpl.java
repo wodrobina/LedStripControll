@@ -74,7 +74,6 @@ public class MainViewImpl implements MainView {
           colourSelectPane.getSaturation().getValue().floatValue()/100, (float) sliderBrightless.getValue()/100);
       Color.getColor(String.valueOf(rgb));
       Color color = new Color(rgb);
-      System.out.println(color);
       txtFieldRed.setText(String.valueOf(color.getRed()));
       txtFieldGreen.setText(String.valueOf(color.getGreen()));
       txtFieldBlue.setText(String.valueOf(color.getBlue()));
@@ -85,16 +84,18 @@ public class MainViewImpl implements MainView {
     };
     layoutGridPane.setOnMouseDragged(rectMouseHandler);
     layoutGridPane.setOnMousePressed(rectMouseHandler);
+    
   }
 
+
+  @Override
   public String getPortNumber(){
-	return txtFieldPort.getText();
-	  
+    return txtFieldPort.getText();
   }
   
+  @Override
   public String getIpAdress(){
-	return txtFieldIpAdress.getText();
-	  
+    return txtFieldIpAdress.getText();
   }
 
 

@@ -4,8 +4,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import Controller.MainViewController;
-
 /**
  * Created by awrob on 2016-11-04.
  */
@@ -27,9 +25,7 @@ public class Server {
 	  
 	 public void sendString(String message, String ipAdress, int port){
 		try {
-			ipAdress = "10.20.0.2";
-			port = 8888;
-			System.out.println(message);
+      // System.out.println(message);
 			datagramSocket = new DatagramSocket();
 			buffer = message.getBytes();
 		 
