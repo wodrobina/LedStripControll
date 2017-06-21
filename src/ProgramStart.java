@@ -21,6 +21,8 @@ public class ProgramStart extends Application{
   @Override
   public void start(Stage stage) throws Exception {
     try {
+      Server server = Server.getInstance();
+      server.run();
 
       // Initialize Loader
       FXMLLoader loader = new FXMLLoader();
