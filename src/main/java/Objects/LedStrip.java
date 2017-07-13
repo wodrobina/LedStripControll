@@ -11,19 +11,19 @@ public class LedStrip {
   
   private double brightless;
   private String ipAdress;
-  private int port;
+  private String port;
   	
   public LedStrip(){
 	  
   }
 
-	public LedStrip(String ipAdress, int port) {
+	public LedStrip(String ipAdress, String port) {
 		super();
 		this.ipAdress = ipAdress;
 		this.port = port;
 	}
 
-	public void setPort(int port) {
+	public void setPort(String port) {
 		this.port = port;
 	}
 	
@@ -75,7 +75,7 @@ public class LedStrip {
 			this.ipAdress = ipAdress;
 		}
 		
-		public int getPort() {
+		public String getPort() {
 			return port;
 		}
 

@@ -56,8 +56,10 @@ public class MainViewController {
 
   public void colourChange(String brightless) {
     ledStrip.setIpAdress(mainView.getIpAdress());
-    ledStrip.setIpAdress(mainView.getPortNumber());
-	  server.sendString(composeMessage( ledStrip.getRed(),  ledStrip.getGreen(),  ledStrip.getBlue(),  ledStrip.getWhite(),  (int)ledStrip.getBrightless()), ledStrip.getIpAdress(), ledStrip.getPort());
+    ledStrip.setPort(mainView.getPortNumber());
+
+    server.sendString(composeMessage( ledStrip.getRed(),  ledStrip.getGreen(),  ledStrip.getBlue(),
+            ledStrip.getWhite(),  (int)ledStrip.getBrightless()), ledStrip.getIpAdress(), ledStrip.getPort());
   }
   
   private String composeMessage(int red, int green, int blue, int saturation, int brightless){

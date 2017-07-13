@@ -30,8 +30,6 @@ public class MyCustomColorPicker extends VBox {
 
     private Pane colorRect;
     private final Pane colorBar;
-    //    private final Pane colorRectOverlayOne;
-//    private final Pane colorRectOverlayTwo;
     private Region colorRectIndicator;
     private final Region colorBarIndicator;
     private Pane newColorRect;
@@ -50,8 +48,7 @@ public class MyCustomColorPicker extends VBox {
     public MyCustomColorPicker() {
 
         getStyleClass().add("my-custom-color");
-
-    VBox box = new VBox();
+        VBox box = new VBox();
 
         box.getStyleClass().add("color-rect-pane");
         customColorProperty().addListener((ov, t, t1) -> colorChanged());
@@ -69,43 +66,15 @@ public class MyCustomColorPicker extends VBox {
 
         Pane colorRectHue = new Pane();
         colorRectHue.backgroundProperty().bind(new ObjectBinding<Background>() {
-
             {
                 bind(hue);
             }
-
             @Override protected Background computeValue() {
                 return new Background(new BackgroundFill(
                         Color.hsb(hue.getValue(), 1.0, 1.0),
                         CornerRadii.EMPTY, Insets.EMPTY));
-
             }
         });
-
-//        colorRectOverlayOne = new Pane();
-//        colorRectOverlayOne.getStyleClass().add("color-rect");
-//        colorRectOverlayOne.setBackground(new Background(new BackgroundFill(
-//                new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
-//                        new Stop(0, Color.rgb(255, 255, 255, 1)),
-//                        new Stop(1, Color.rgb(255, 255, 255, 0))),
-//                CornerRadii.EMPTY, Insets.EMPTY)));
-//
-//        EventHandler<MouseEvent> rectMouseHandler = event -> {
-//            final double x = event.getX();
-//            final double y = event.getY();
-//            sat.set(clamp(x / colorRect.getWidth()) * 100);
-//            bright.set(100 - (clamp(y / colorRect.getHeight()) * 100));
-//            updateHSBColor();
-//        };
-
-//        colorRectOverlayTwo = new Pane();
-//        colorRectOverlayTwo.getStyleClass().addAll("color-rect");
-//        colorRectOverlayTwo.setBackground(new Background(new BackgroundFill(
-//                new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,
-//                        new Stop(0, Color.rgb(0, 0, 0, 0)), new Stop(1, Color.rgb(0, 0, 0, 1))),
-//                CornerRadii.EMPTY, Insets.EMPTY)));
-//        colorRectOverlayTwo.setOnMouseDragged(rectMouseHandler);
-//        colorRectOverlayTwo.setOnMousePressed(rectMouseHandler);
 
         Pane colorRectBlackBorder = new Pane();
         colorRectBlackBorder.setMouseTransparent(true);
@@ -151,7 +120,6 @@ public class MyCustomColorPicker extends VBox {
         });
 
         colorBar.getChildren().setAll(colorBarIndicator);
-//        colorRectOpacityContainer.getChildren().setAll(colorRectHue, colorRectOverlayOne, colorRectOverlayTwo);
         colorRectOpacityContainer.getChildren().setAll(colorRectHue);
         colorRect.getChildren().setAll(colorRectOpacityContainer, colorRectBlackBorder, colorRectIndicator);
         VBox.setVgrow(colorRect, Priority.SOMETIMES);
