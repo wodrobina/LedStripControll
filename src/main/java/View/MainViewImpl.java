@@ -95,10 +95,9 @@ public class MainViewImpl implements MainView {
   }
 
   private boolean isIpAdressSet(){
-    if(Pattern.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b", getPortNumber())){
+    if(Pattern.matches("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b", getIpAdress())){
       return true;
     }
-    //TODO: put some popup alert here
     return false;
   }
 
@@ -106,7 +105,6 @@ public class MainViewImpl implements MainView {
     if(Pattern.matches("\\b\\d{1,5}\\b", getPortNumber())){
       return true;
     }
-    //TODO: put some popup alert here
     return false;
   }
 
@@ -115,11 +113,10 @@ public class MainViewImpl implements MainView {
     boolean isPortSet = isPortSet();
 
     if(!isIpAdressSet & !isPortSet){
-      //TODO: fix it :P
       Dialog<Pair<String, String>> dialog = new Dialog<>();
       dialog.setTitle("Enter ip adress and port");
-      ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.APPLY);
-      dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+      ButtonType adressButonType = new ButtonType("OK", ButtonBar.ButtonData.APPLY);
+      dialog.getDialogPane().getButtonTypes().addAll(adressButonType, ButtonType.CANCEL);
 
       GridPane grid = new GridPane();
       grid.setHgap(10);
@@ -128,8 +125,10 @@ public class MainViewImpl implements MainView {
 
       TextField ipAdress = new TextField();
       ipAdress.setPromptText("Ip Adress");
+      ipAdress.setText("192.168.0.1");
       TextField port = new TextField();
       port.setPromptText("Port");
+      port.setText("80");
 
       grid.add(new Label("Ip Adress:"), 0, 0);
       grid.add(ipAdress, 1, 0);
@@ -137,15 +136,23 @@ public class MainViewImpl implements MainView {
       grid.add(port, 1, 1);
 
       dialog.getDialogPane().setContent(grid);
+      dialog.setResultConverter(dialogButton -> {
+        if (dialogButton == adressButonType) {
+          return new Pair<>(ipAdress.getText(), port.getText());
+        }
+        return null;
+      });
+
       Optional<Pair<String, String>> result = dialog.showAndWait();
 
       result.ifPresent(values -> {
         txtFieldIpAdress.setText(values.getKey());
         txtFieldPort.setText(values.getValue());
       });
+      return isIpAdressSet() && isPortSet() ? true : false;
     }
-    else {
-      if (!isIpAdressSet){
+    else if (!isIpAdressSet){
+
         TextInputDialog dialog = new TextInputDialog("192.168.0.1");
         dialog.setTitle("Enter ip adress");
         dialog.setContentText("Please enter ip adress:");
@@ -153,8 +160,8 @@ public class MainViewImpl implements MainView {
         result.ifPresent(value ->  txtFieldIpAdress.setText(value));
 
         return isIpAdressSet();
-      }
-      if (!isPortSet){
+    }
+    else if (!isPortSet){
         TextInputDialog dialog = new TextInputDialog("80");
         dialog.setTitle("Enter port number");
         dialog.setContentText("Please enter port number:");
@@ -162,10 +169,9 @@ public class MainViewImpl implements MainView {
         result.ifPresent(value ->  txtFieldPort.setText(value));
 
         return isPortSet();
-      }
     }
 
-    return false;
+    return true;
   }
 
   @Override
@@ -177,7 +183,5 @@ public class MainViewImpl implements MainView {
   public String getIpAdress(){
     return txtFieldIpAdress.getText();
   }
-
-
 
 }
